@@ -40,7 +40,8 @@ for filename in files.strip().split()[1:]:
     with open(filename, "rb") as file:
         msg.add_boundary()
         msg.add_type(mysmtp.MIMA_TYPES[extract_extension(filename)])
-        msg.add_disposition("attachment", filename)
+        if extract_extension(filename) != "txt" or extract_extension(filename) != "html":
+            msg.add_disposition("attachment", filename)
         msg.add_content_encoding("base64")
         msg.add_data(base64.b64encode(file.read()))
 msg.add_end()
