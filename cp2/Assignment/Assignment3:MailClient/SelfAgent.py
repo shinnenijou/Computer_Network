@@ -45,7 +45,6 @@ for filename in files.strip().split()[1:]:
         msg.add_content_encoding("base64")
         msg.add_data(base64.b64encode(file.read()))
 msg.add_end()
-print(msg.encode().decode())
 
 # Creat socket via SSL
 clientSocket = mysmtp.SMTPSocket((serverName, serverPort))
@@ -64,7 +63,7 @@ if clientSocket.mail_from(fromMailAddr) != 250:
 clientSocket.rcpt_to(toMailAddr)
 
 # send DATA command
-if clientSocket.send_data(msg.encode()) == 250:
+if clientSocket.send_msg(msg) == 250:
     print(f"Successfully sent to {toMailAddr}.")
 
 # Send QUIT command

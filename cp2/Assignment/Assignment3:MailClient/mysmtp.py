@@ -30,13 +30,13 @@ class SMTPSocket():
         recv = self._send_n_recv(command.encode() + b"\r\n")
         return int(recv[:3])
 
-    def send_data(self, bytes) -> int:
+    def send_msg(self, SMTPMsg) -> int:
         command = "DATA"
         recv = self._send_n_recv(command.encode() + b"\r\n")
         # EXCEPTION
         if recv[:3] != "354":
             raise IOError
-        recv = self._send_n_recv(bytes + b"\r\n.\r\n")
+        recv = self._send_n_recv(SMTPMsg.encode() + b"\r\n.\r\n")
         return int(recv[:3])
 
     def login(self, tuple) -> int:
