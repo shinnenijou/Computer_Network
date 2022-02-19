@@ -1,3 +1,5 @@
 
 .DS_Store
 *.pyc
+cp2/Assignment/Assignment3:MailClient/account_config.py
+tools.py
